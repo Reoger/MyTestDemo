@@ -1,9 +1,18 @@
 package com.example.cm.mytestdemo.user.presener
 
+import android.annotation.SuppressLint
 import android.content.Context
-import android.util.Log
+import android.content.SharedPreferences
+import com.example.cm.mytestdemo.user.Constance
+import com.example.cm.mytestdemo.user.model.LoginInfo
 import com.example.cm.mytestdemo.user.view.ILoginView
-import com.example.cm.mytestdemo.user.view.LoginActivity
+import com.example.cm.mytestdemo.utils.netWork.ApiClient
+import com.example.cm.mytestdemo.utils.netWork.ApiErrorModel
+import com.example.cm.mytestdemo.utils.netWork.ApiResponse
+import com.example.cm.mytestdemo.utils.netWork.NetworkScheduler
+import com.trello.rxlifecycle2.android.ActivityEvent
+import com.trello.rxlifecycle2.components.support.RxAppCompatActivity
+import com.trello.rxlifecycle2.kotlin.bindUntilEvent
 
 /**
  * Created by CM on 2018/1/24
@@ -11,28 +20,49 @@ import com.example.cm.mytestdemo.user.view.LoginActivity
  * .
  */
 
-class LoginPresenter(mContext: Context) : ILoginPresenter {
-    var longview :ILoginView?=null
-
-    override fun doLogin(str:String,password:String) {
-        Log.d("TAG","进入了doLogin方法")
-//        Thread(Runnable { Thread.sleep(1000)
-            if(str.equals("reoger")&&password.equals("123456")){
-                longview?.loginResult(1,"登录成功")
-            }else
-                longview?.loginResult(-1,"登录失败")
-//        })
-
+class LoginPresenter(var mContext: RxAppCompatActivity?, var longview: ILoginView?) : ILoginPresenter {
+    override fun checkRememberPasswd() {
+        val sp :SharedPreferences = mContext?.getSharedPreferences(Constance.REMEMBER_PASSWD, Context.MODE_PRIVATE)!!
+        val isRemember = sp.getBoolean(Constance.ISEMBER,false)
+        if (isRemember){
+            val user = sp.getString(Constance.USER, "")
+            val password = sp.getString(Constance.PASSWORD,"")
+            longview?.checkRememberPassWd(user,password)
+        }
     }
 
-    override fun loginResult(res: String) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    @SuppressLint("ApplySharedPref")
+    override fun rememberPasswd(isRemember:Boolean,userName: String, password: String) {
+        val sp :SharedPreferences = mContext?.getSharedPreferences(Constance.REMEMBER_PASSWD, Context.MODE_PRIVATE)!!
+        val edit = sp.edit()
+        if(isRemember){
+            edit.putBoolean(Constance.ISEMBER,true)
+            edit.putString(Constance.USER,userName)
+            edit.putString(Constance.PASSWORD,password)
+        }else{
+            edit.putBoolean(Constance.ISEMBER,false)
+        }
+        edit.commit()
     }
 
-    init {
-        this.longview = LoginActivity()
-        Log.d("debug","进入了构造方法")
 
+    override fun doLogin(str: String, password: String) {
+        ApiClient.instance.service.login(str, password)
+                .compose(NetworkScheduler.compose())
+                .bindUntilEvent(mContext!!, event = ActivityEvent.DESTROY)
+                .subscribe(object : ApiResponse<LoginInfo>(mContext!!) {
+                    override fun success(data: LoginInfo) {
+                        longview?.apply {
+                            this.loginResult(1, "登录成功" + data.data.toString())
+                        }
+                    }
+
+                    override fun failure(statusCode: Int, apiErrorModel: ApiErrorModel) {
+                        longview?.apply {
+                            this.loginResult(-1, "登录失败")
+                        }
+                    }
+                })
     }
 
 }

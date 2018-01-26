@@ -1,12 +1,12 @@
 package com.example.cm.mytestdemo
 
-import android.content.Intent
 import android.os.Bundle
 import android.support.v7.widget.Toolbar
 import android.util.Log
 import android.view.View
 import com.example.cm.mytestdemo.base.BaseActivity
 import com.example.cm.mytestdemo.user.view.LoginActivity
+import kotlinx.android.synthetic.main.activity_main.*
 
 
 class MainActivity : BaseActivity() {
@@ -21,6 +21,7 @@ class MainActivity : BaseActivity() {
 
     override fun setActionBar() {
        setActivityTitle("demo1")
+
     }
 
     override fun initView() {
@@ -37,6 +38,10 @@ class MainActivity : BaseActivity() {
 
         setRight("helo", View.OnClickListener { toast("点击了")
         openActivity(LoginActivity::class.java)
+        })
+
+        TestButton.setOnClickListener({
+            openActivity(TestActivity::class.java)
         })
     }
 

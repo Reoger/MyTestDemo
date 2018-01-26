@@ -115,4 +115,5 @@ public class LVCircularRing extends View {
 
         return valueAnimator;
     }
+
 }

@@ -2,6 +2,7 @@
 package com.example.cm.mytestdemo.base
 
 import android.annotation.SuppressLint
+import android.app.Dialog
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
@@ -16,25 +17,22 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.View
-import android.view.View.GONE
-import android.view.View.VISIBLE
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.Toast
 import com.example.cm.mytestdemo.R
+import com.example.cm.mytestdemo.utils.loadingUtils.LoadDialog
 
 
 import kotlinx.android.synthetic.main.activity_base.*
-import com.example.cm.mytestdemo.utils.loadingUtils.LoadingDialog
-
-
+import com.trello.rxlifecycle2.components.support.RxAppCompatActivity
 
 
 /**
  * Created by CM on 2018/1/23.
  *
  */
-abstract class BaseActivity : AppCompatActivity() {
+abstract class BaseActivity : RxAppCompatActivity() {
 
     protected val TAG: String = "debug"
 
@@ -42,7 +40,7 @@ abstract class BaseActivity : AppCompatActivity() {
 
     private var menuRes: Int = -1
 
-    protected var dialog: LoadingDialog?= null
+    protected var dialog: Dialog?= null
 
 
 
@@ -196,28 +194,26 @@ abstract class BaseActivity : AppCompatActivity() {
     protected open fun okOperation() {}
 
     fun startLoad(){
-        if(dialog == null){
-            startLoad("玩命加载中...")
-        }
+//        dialog = Dialog(this,R.style.progress_dialog)
+//        dialog?.setContentView(R.layout.dialog)
+//        dialog?.setCancelable(false)
+//        dialog!!.window.setBackgroundDrawableResource(android.R.color.transparent)
+//        dialog?.setCanceledOnTouchOutside(false)
+//        dialog?.show()
+        LoadDialog.show(this)
     }
 
     fun startLoad(str: String){
-//        if(dialog == null){
-//            dialog = LoadingDialog(this, str)
-//        }
-//        dialog?.show()
-//        log("这里的dialog还是不为空"+dialog.toString())
 
-        progressBar2.visibility = VISIBLE
     }
 
     fun stopLoad(){
-//        log("这里的dialog就编程了空"+dialog.toString())
-//        if(dialog == null){
-//            log("这里显示 ")
-//            dialog?.close()
+//        dialog?.let {
+//            if(dialog!!.isShowing){
+//                dialog?.dismiss()
+//            }
 //        }
-        progressBar2.visibility = GONE
+        LoadDialog.cancel()
     }
 
     fun log(str: String){

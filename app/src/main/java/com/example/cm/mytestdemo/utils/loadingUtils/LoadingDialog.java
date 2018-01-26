@@ -34,6 +34,7 @@ public class LoadingDialog {
         // 显示文本
         loadingText.setText(msg);
         // 创建自定义样式的Dialog
+//        mLoadingDialog = new Dialog(context, R.style.loading_dialog);
         mLoadingDialog = new Dialog(context, R.style.loading_dialog);
         // 设置返回键无效
         mLoadingDialog.setCancelable(false);
@@ -46,7 +47,6 @@ public class LoadingDialog {
         mLoadingDialog.show();
         Log.d("debug","xianshi进度条的实际操作");
         mLoadingView.startAnim();
-
     }
 
 //    public void loadFial(){

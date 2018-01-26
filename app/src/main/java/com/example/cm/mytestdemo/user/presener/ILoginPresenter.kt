@@ -1,9 +1,13 @@
 package com.example.cm.mytestdemo.user.presener
 
+import com.example.cm.mytestdemo.user.model.RegisterInfo
+
 /**
  * Created by CM on 2018/1/24.
  */
 interface ILoginPresenter {
     fun doLogin(str:String,password:String)
-    fun loginResult(res: String)
+    fun rememberPasswd(isRemember:Boolean,userName:String,password: String)
+    fun checkRememberPasswd()
+//    fun registerUser(register: RegisterInfo)
 }
