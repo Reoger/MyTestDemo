@@ -1,10 +1,11 @@
 package com.example.cm.mytestdemo.utils.netWork
 
 import com.example.cm.mytestdemo.bean.Repo
+import com.example.cm.mytestdemo.home.model.ResultBySearchContent
+import com.example.cm.mytestdemo.home.model.SearchByContentBean
 import com.example.cm.mytestdemo.user.model.LoginInfo
 import com.example.cm.mytestdemo.user.model.RegisterInfo
 import io.reactivex.Observable
-import okhttp3.ResponseBody
 import retrofit2.http.*
 
 /**
@@ -23,5 +24,9 @@ interface GitHubService{
     @POST("userMaster/api/register.php")
     fun register(@Field("user_name")user:String,@Field("user_passwd")passwd: String,@Field("nickname")nickname:String,@Field("user_birthday")user_birthday:String
     ,@Field("user_email")user_email:String,@Field("user_introduction")user_introduction:String): Observable<RegisterInfo>
+
+    @POST("_search")
+    fun searchByContent(@Body searchByContentBean: SearchByContentBean): Observable<ResultBySearchContent>
+
 
 }

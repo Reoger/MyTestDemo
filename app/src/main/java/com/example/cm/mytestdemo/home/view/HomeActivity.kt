@@ -8,7 +8,9 @@ import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import com.example.cm.mytestdemo.R
+import com.example.cm.mytestdemo.home.view.fragment.HomeFragment
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity
+import kotlinx.android.synthetic.main.activity_content.*
 import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 
@@ -52,9 +54,35 @@ class HomeActivity : RxAppCompatActivity(),NavigationView.OnNavigationItemSelect
         setSupportActionBar(toolbar)
         val actionBarDrawerToggle = ActionBarDrawerToggle(this, drawer_layout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
         drawer_layout.addDrawerListener(actionBarDrawerToggle)
-
         actionBarDrawerToggle.syncState()
 
+        initFragment()
+        navigation.setOnNavigationItemSelectedListener({
+            when(it.itemId){
+                R.id.navigation_home->{
+
+
+                }
+                R.id.navigation_dashboard->{
+
+                }
+                R.id.navigation_notifications->{
+
+                }
+                else->{
+
+                }
+            }
+                false
+        })
+    }
+
+    private fun initFragment() {
+        val beginTransaction = fragmentManager.beginTransaction()
+        val homeFragment = HomeFragment()
+        beginTransaction.replace(R.id.frame_content,homeFragment)
+        beginTransaction.addToBackStack(null)
+        beginTransaction.commit()
     }
 
     override fun onBackPressed() {
