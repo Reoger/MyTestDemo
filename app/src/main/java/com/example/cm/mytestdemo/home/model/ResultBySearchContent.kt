@@ -1,5 +1,6 @@
 package com.example.cm.mytestdemo.home.model
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 
 /**
@@ -12,13 +13,13 @@ data class ResultBySearchContent(
 		@SerializedName("timed_out") var timedOut: Boolean, //false
 		@SerializedName("_shards") var shards: Shards,
 		@SerializedName("hits") var hits: Hits
-)
+) : Serializable
 
 data class Hits(
 		@SerializedName("total") var total: Int, //2068
 		@SerializedName("max_score") var maxScore: Double, //3.2571268
 		@SerializedName("hits") var hits: List<Hit>
-)
+) : Serializable
 
 data class Hit(
 		@SerializedName("_index") var index: String, //document
@@ -26,22 +27,22 @@ data class Hit(
 		@SerializedName("_id") var id: String, //AWDyf0-bXBltiY6dTjJp
 		@SerializedName("_score") var score: Double, //2.730814
 		@SerializedName("_source") var source: Source
-)
+) : Serializable
 
 data class Source(
 		@SerializedName("content") var content: String, //纪律和.
-		@SerializedName("down_link") var downLink: String, //172.22.66.245:50075/webhdfs/v1/input/æ%
+		@SerializedName("down_link") var downLink: String, //172.cat.66.245:50075/webhdfs/v1/input/æ%
 		@SerializedName("integer") var integer: Int, //135704
 		@SerializedName("key_word") var keyWord: String, //党
 		@SerializedName("name") var name: String, //湖工大党字
 		@SerializedName("organization") var organization: String, //湖工大
 		@SerializedName("time") var time: Int, //2015
 		@SerializedName("upload_time") var uploadTime: Long //1515896917913
-)
+): Serializable
 
 data class Shards(
 		@SerializedName("total") var total: Int, //24
 		@SerializedName("successful") var successful: Int, //24
 		@SerializedName("skipped") var skipped: Int, //0
 		@SerializedName("failed") var failed: Int //0
-)
+): Serializable
