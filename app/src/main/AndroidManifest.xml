@@ -5,6 +5,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
 
     <application
@@ -31,6 +32,8 @@
 
         <activity android:name=".user.view.RegisterActivity" />
         <activity android:name=".search.view.SearchResultActivity"/>
+        <activity android:name=".home.TestActivity2"/>
+        <activity android:name=".read.view.TestActivity3"/>
 
     </application>
 

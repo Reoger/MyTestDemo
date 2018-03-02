@@ -1,6 +1,7 @@
 
 package com.example.cm.mytestdemo.base
 
+
 import android.annotation.SuppressLint
 import android.app.Dialog
 import android.content.Intent
@@ -11,7 +12,6 @@ import android.support.annotation.LayoutRes
 import android.support.annotation.MenuRes
 import android.support.annotation.StringRes
 import android.support.v7.app.AlertDialog
-import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
 import android.util.Log
 import android.view.LayoutInflater
@@ -22,10 +22,8 @@ import android.widget.LinearLayout
 import android.widget.Toast
 import com.example.cm.mytestdemo.R
 import com.example.cm.mytestdemo.utils.loadingUtils.LoadDialog
-
-
-import kotlinx.android.synthetic.main.activity_base.*
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity
+import kotlinx.android.synthetic.main.activity_base.*
 
 
 /**
@@ -127,9 +125,14 @@ abstract class BaseActivity : RxAppCompatActivity() {
     }
 
 
-
+    /**
+     * 设置actionBar的标题和其他属性。
+     */
     abstract fun setActionBar()
 
+    /**
+     * 在这里初始化界面 例如
+     */
     abstract fun initView()
 
 

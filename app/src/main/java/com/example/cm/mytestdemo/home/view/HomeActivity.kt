@@ -1,5 +1,6 @@
 package com.example.cm.mytestdemo.home.view
 
+import android.content.Intent
 import android.content.res.Configuration
 import android.os.Bundle
 import android.support.design.widget.NavigationView
@@ -9,9 +10,11 @@ import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import com.example.cm.mytestdemo.R
+import com.example.cm.mytestdemo.home.TestActivity2
 import com.example.cm.mytestdemo.home.view.fragment.DocumentFragment
 import com.example.cm.mytestdemo.home.view.fragment.HomeFragment
 import com.example.cm.mytestdemo.home.view.fragment.ToolsFragment
+import com.example.cm.mytestdemo.read.view.TestActivity3
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity
 import kotlinx.android.synthetic.main.activity_content.*
 import kotlinx.android.synthetic.main.activity_home.*
@@ -33,10 +36,12 @@ class HomeActivity : RxAppCompatActivity(),NavigationView.OnNavigationItemSelect
         Log.d("debug","这撒大声地的吗")
         when(item?.itemId){
             R.id.nav_camera->{
+                //就利用这里来进行测试吧
+                startActivity(Intent(this,TestActivity2::class.java))
 
             }
             R.id.nav_gallery->{
-
+                startActivity(Intent(this, TestActivity3::class.java))
             }
             R.id.nav_slideshow->{
 
