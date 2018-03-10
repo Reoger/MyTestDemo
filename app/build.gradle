@@ -59,4 +59,7 @@ dependencies {
     // 阅读pdf
     //    compile 'com.joanzapata.pdfview:android-pdfview:1.0.4@aar'
     implementation files('libs/tbs_sdk_thirdapp_v3.5.0.1004_43500_sharewithdownload_withoutGame_obfs_20170801_113025.jar')
+
+    //下载管理
+    compile 'me.jessyan:progressmanager:1.5.0'
 }

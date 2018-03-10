@@ -34,6 +34,9 @@
         <activity android:name=".search.view.SearchResultActivity"/>
         <activity android:name=".home.TestActivity2"/>
         <activity android:name=".read.view.TestActivity3"/>
+        <activity android:name=".home.TestActivity4"/>
+
+        <service android:name=".utils.downloader.service.DownloadService"/>
 
     </application>
 

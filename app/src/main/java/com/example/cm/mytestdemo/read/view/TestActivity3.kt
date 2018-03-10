@@ -121,19 +121,16 @@ class TestActivity3 : AppCompatActivity() {
                     fos = FileOutputStream(fileN)
                     var sum: Long = 0
 
-                    do{
+
+                    while (true) {
                         len = ints!!.read(buf)
+                        if(len == -1)
+                            break
                         fos.write(buf, 0, len)
                         sum += len.toLong()
                         val progress = (sum * 1.0f / total!! * 100).toInt()
                         TLog.d(TAG, "写入缓存文件" + fileN.name + "进度: " + progress)
-                    }while (len!=-1)
-//                    while ((len = ints!!.read(buf)) != -1) {
-//                        fos.write(buf, 0, len)
-//                        sum += len.toLong()
-//                        val progress = (sum * 1.0f / total!! * 100).toInt()
-//                        TLog.d(TAG, "写入缓存文件" + fileN.name + "进度: " + progress)
-//                    }
+                    }
                     fos.flush()
                     TLog.d(TAG, "文件下载成功,准备展示文件。")
                     //2.ACache记录文件的有效期

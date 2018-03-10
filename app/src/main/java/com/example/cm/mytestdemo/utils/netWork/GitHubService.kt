@@ -10,7 +10,9 @@ import retrofit2.http.*
 
 /**
  * Created by CM on 2018/1/25.
+ * 同一个网址
  */
+
 interface GitHubService{
     //请添加相应的`API`调用方法
     @GET("users/{user}/repos")
